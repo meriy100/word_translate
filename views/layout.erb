@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head >
+  <style>.wrappr{padding-top: 55px  } </style>
+    <meta charset="utf-8">
+    <title><%= @title %></title>
+  </head>
+  <body>
+    <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+            <div class="nav-collapse">
+              <ul class="nav">
+                <form action="/create" method="post" id="frm" class="pull-left">
+                  <label for="url">URL</label>
+                    <input type="url" name="url" id="url">
+                  <label for="title">タイトル</label>
+                    <input type="title" name="title" id="title">
+                  <label for = "tag" >タグ</label>
+                    <input type="tag" name="tag" id = "tag">
+                  <input type="submit" value="追加" name="commit" class="btn btn-primary"></input>
+                </form>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class = "wrappr">
+      
+      <%= yield %>
+    </div>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

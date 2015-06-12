@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+</head>
+<body>
+  <div class="continer-fluid">
+    <div class = "row">
+      <div class="col-md-3">
+        <div class="navbar navbar-default" role="navigation">
+          sideber
+          <%50.times do%>
+            hello</br>
+          <%end%>
+        </div>
+        <%# render 'sideber' %>
+      </div>
+      <div class="col-md-9">
+        <div class = "continer-fluid">
+          <% @bookmarks.each do |bookmark|%>
+            <div class="col-md-3">
+              <img src="http://capture.heartrails.com/free?<%= bookmark.url %>" alt="" />
+              <p>
+                <a href="<%= bookmark.url %>">
+                  <%= bookmark.title %></br>
+                </a>
+                <%= bookmark.tag%>
+              </p>
+            </div>
+          <%end%>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  
+  <script>
+    $('#url').change(function(){
+        $.get("/api/site", {url: $(this).val()},
+          function(data){
+            $('#title').val(data.title);
+            });
+        })
+  </script>
+  
+  
+  
+  
+  
+  
+  </body>
+</html>
