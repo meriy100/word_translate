@@ -14,9 +14,10 @@
 ActiveRecord::Schema.define(version: 20150606035410) do
 
   create_table "bookmarks", force: :cascade do |t|
-    t.string   "title"
-    t.string   "url"
-    t.string   "tag"
+    t.string   "en"
+    t.string   "ja"
+    t.integer  "count"
+    t.boolean  "hide"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

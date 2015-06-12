@@ -1,43 +1,45 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>Document</title>
-  <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-</head>
+  <%#<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>%>
 <body>
-  <div class="continer-fluid">
-    <div class = "row">
-      <div class="col-md-3">
-        <div class="navbar navbar-default" role="navigation">
-          sideber
-          <%50.times do%>
-            hello</br>
-          <%end%>
-        </div>
-        <%# render 'sideber' %>
-      </div>
-      <div class="col-md-9">
-        <div class = "continer-fluid">
-          <% @bookmarks.each do |bookmark|%>
-            <div class="col-md-3">
-              <img src="http://capture.heartrails.com/free?<%= bookmark.url %>" alt="" />
-              <p>
-                <a href="<%= bookmark.url %>">
-                  <%= bookmark.title %></br>
-                </a>
-                <%= bookmark.tag%>
-              </p>
-            </div>
-          <%end%>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
+  <table  class="table table-striped"> 
+    <thead>
+      <tr>
+        <th>english</th>
+        <th>japanese</th>
+        <th>count</th>
+      </tr>
+    </thead>
   
+    <tbody> 
+      <% @bookmarks.each do |w|%>
+        <%# under table if hide false %> 
+        <%unless w.hide%>
+          <tr>
+            <td><%= w.en %></td>
+            <td><%= w.ja %></td>
+            <td><%= w.count %></td>
+            <td>
+              <form action="/edit/<%= w.id %>" method="post" >
+                <input type="submit" value="Edit" class="btn btn-primary">
+              </form>
+            </td>
+            <td>
+              <form action="/to_hide/<%= w.id %>" method="post" >
+                <input type="submit" value="Hide" class="btn btn-warning">
+              </form>
+            </td>
+            <td>
+              <form action="/delete/<%= w.id %>" method="post" >
+                <input type="submit" value="Destroy" class="btn btn-danger">
+              </form>
+            </td>
+          </tr>
+          <%end%>
+        <%end%>
+      </tbody>
+  </table>
+
+
+<%#  
   <script>
     $('#url').change(function(){
         $.get("/api/site", {url: $(this).val()},
@@ -46,11 +48,5 @@
             });
         })
   </script>
-  
-  
-  
-  
-  
-  
-  </body>
-</html>
+%>
+</body>

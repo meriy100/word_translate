@@ -1,0 +1,10 @@
+<body>
+<h1>Edit</h1>
+<form action="/renew/<%= @data.id%>" method="post">
+  <label for="en" class="text text-danger" >english</label>
+  <input type="en" name="en" value="<%=@data.en %>" class="btn btn-default"  >
+  <label for="ja" class="text text-info">japanese</label>
+  <input type="ja" name="ja" value="<%=@data.ja %>" class="btn btn-default"  >
+  <p><input type="submit" value="done"class="btn btn-primary" ></p>
+</form>
+</body>
