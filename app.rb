@@ -9,7 +9,8 @@ require "./parsing_doc.rb"
 
 #test
 get '/' do
-  @bookmarks = Bookmark.all
+  @bookmarks = Bookmark.order "id DESC"
+  #@bookmarks = Bookmark.all
   @title = "Words table"
   erb :index
 end
@@ -18,7 +19,7 @@ post '/create' do
   list = parsing params[:text]
   list.each do |word|
     unless @data =  Bookmark.find_by(en: word)
-      ja =  translate_goo_en_to_ja word 
+      ja =  translate_goo_en_to_ja word
       sleep 0.5
       Bookmark.create en: word, ja: ja, count: 1 
     else
