@@ -18,6 +18,7 @@ end
 post '/create' do
   list = parsing params[:text]
   list.each do |word|
+    word.downcase!
     unless @data =  Bookmark.find_by(en: word)
       ja =  translate_goo_en_to_ja word
       sleep 0.5
