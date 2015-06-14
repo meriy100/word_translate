@@ -2,7 +2,7 @@
 <html lang="ja">
   <head >
   <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-  <style>.wrappr{padding-top: 55px  } </style>
+  <style>.wrappr{padding-top: 70px  } </style>
     <meta charset="utf-8">
     <title><%= @title %></title>
   </head>
@@ -21,6 +21,10 @@
                   <label for="text" class="text-primary">Text</label>
                     <input type="text" name="text" id="text">
                   <input type="submit" value= "add" name="commit" class="btn btn-primary"></input>
+                </form>
+                <form action="/tofile" method="post" id="frm" class="pull-left">
+                  <input type="file" name="file" >
+                  <input type="submit" value="add" class="btn btn-info" ></input>
                 </form>
               </ul>
             </div>

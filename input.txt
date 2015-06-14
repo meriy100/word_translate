@@ -1,0 +1,19 @@
+Config Variables
+Config vars change the way your app behaves.
+In addition to creating your own, some addons come with their own.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -7,22 +7,39 @@ require './models/bookmark.rb'
 require_relative "./translate"
 require "./parsing_doc.rb"
 
-#test
 get '/' do
-  @bookmarks = Bookmark.order "id DESC"
-  #@bookmarks = Bookmark.all
+  @words = Word.order "id DESC"
+  #@words = Word.all
   @title = "Words table"
   erb :index
 end
+
+
+def line_translate line
+  line.each do |word|
+    word.downcase!
+    unless @data =  Word.find_by(en: word)
+      ja =  translate_goo_en_to_ja word
+      sleep 0.5
+      Word.create en: word, ja: ja, count: 1
+    else
+      @data.update( {count: @data.count + 1 })
+    end
+  end
+
+end
+
+
+
 
 post '/create' do
   list = parsing params[:text]
   list.each do |word|
     word.downcase!
-    unless @data =  Bookmark.find_by(en: word)
+    unless @data =  Word.find_by(en: word)
       ja =  translate_goo_en_to_ja word
       sleep 0.5
-      Bookmark.create en: word, ja: ja, count: 1 
+      Word.create en: word, ja: ja, count: 1
     else
       @data.update( {count: @data.count + 1 })
     end
@@ -30,24 +47,33 @@ post '/create' do
   redirect '/'
 end
 
+post '/tofile' do
+  list = parsing_doc params[:file]
+  list.each do |line|
+    line_translate line
+  end
+
+  redirect '/'
+end
+
 post '/delete/:id' do
-  Bookmark.find(params[:id]).destroy
+  Word.find(params[:id]).destroy
   redirect '/'
 end
 
 post '/to_hide/:id' do
-  Bookmark.find(params[:id]).update({hide: true})
+  Word.find(params[:id]).update({hide: true})
   redirect '/'
 end
 
 post '/edit/:id' do
-  @data = Bookmark.find(params[:id])
+  @data = Word.find(params[:id])
   @title = "Edit #{@data.en}"
   erb :edit
 end
 
 post '/renew/:id' do
-  @data = Bookmark.find(params[:id])
+  @data = Word.find(params[:id])
   @data.update({
     en: params[:en],
     ja: params[:ja]
