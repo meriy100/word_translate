@@ -19,6 +19,7 @@ GEM
     builder (3.2.2)
     i18n (0.7.0)
     json (1.8.2)
+    lemmatizer (0.1.1)
     mini_portile (0.6.2)
     minitest (5.5.1)
     multi_json (1.11.0)
@@ -56,6 +57,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
+  lemmatizer
   nokogiri
   pg
   rake

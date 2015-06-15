@@ -2,6 +2,7 @@
 
 require "open-uri"
 require "nokogiri"
+require "lemmatizer"
 
   def translate_en_to_jp(word_en)
     # (1) 英単語の単語ItemIdを取得
@@ -52,6 +53,8 @@ require "nokogiri"
 def translate_goo_en_to_ja word_en, output = :one  
   #ja word list
   ja_list = Hash.new ""
+  #lem = Lemmatizer.new
+  #word_en = lem.lemma word_en, :noun
   goo_url="http://dictionary.goo.ne.jp/srch/ej/#{word_en}/m0u/"
   #puts goo_url
   userAgent = 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; )'  

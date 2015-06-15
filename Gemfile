@@ -7,6 +7,9 @@ gem 'sinatra-contrib'
 gem 'activerecord'
 gem 'sinatra-activerecord'
 gem 'nokogiri'
+
+gem 'lemmatizer'
+
 group :development do
   gem 'sqlite3'
 end

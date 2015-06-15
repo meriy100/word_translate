@@ -6,6 +6,7 @@ require "sinatra/json"
 require './models/bookmark.rb'
 require_relative "./translate"
 require "./parsing_doc.rb"
+require "lemmatizer"
 
 get '/' do
   @words = Word.order "id DESC"
@@ -22,6 +23,8 @@ end
 def line_translate line
   line.each do |word|
     word.downcase!
+    lem = Lemmatizer.new
+    word = lem.lemma(word, :noun)
     unless @data =  Word.find_by(en: word)
       ja_word =  translate_goo_en_to_ja word
       sleep 0.25
