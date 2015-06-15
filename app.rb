@@ -14,14 +14,18 @@ get '/' do
   erb :index
 end
 
+get '/show/:id' do
+  @word = Word.find(params[:id])
+  erb :show
+end
 
 def line_translate line
   line.each do |word|
     word.downcase!
     unless @data =  Word.find_by(en: word)
-      ja =  translate_goo_en_to_ja word
-      sleep 0.5
-      Word.create en: word, ja: ja, count: 1
+      ja_word =  translate_goo_en_to_ja word
+      sleep 0.25
+      Word.create en: word, ja: ja_word, count: 1
     else
       @data.update( {count: @data.count + 1 })
     end
@@ -29,21 +33,9 @@ def line_translate line
 
 end
 
-
-
-
 post '/create' do
-  list = parsing params[:text]
-  list.each do |word|
-    word.downcase!
-    unless @data =  Word.find_by(en: word)
-      ja =  translate_goo_en_to_ja word
-      sleep 0.5
-      Word.create en: word, ja: ja, count: 1
-    else
-      @data.update( {count: @data.count + 1 })
-    end
-  end
+  line = parsing params[:text]
+  line_translate line
   redirect '/'
 end
 
@@ -52,7 +44,6 @@ post '/tofile' do
   list.each do |line|
     line_translate line
   end
-
   redirect '/'
 end
 

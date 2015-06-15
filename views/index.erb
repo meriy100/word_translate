@@ -18,6 +18,11 @@
             <td><%= w.ja %></td>
             <td><%= w.count %></td>
             <td>
+              <form action="/show/<%= w.id %>" method="get" >
+                <input type="submit" value="show" >
+              </form>
+            </td>
+            <td>
               <form action="/edit/<%= w.id %>" method="post" >
                 <input type="submit" value="Edit" class="btn btn-primary">
               </form>
